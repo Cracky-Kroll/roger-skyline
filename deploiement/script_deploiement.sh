@@ -47,6 +47,8 @@ Username=${Username:-"roger"}                                 ?
 sudo adduser $Username
 sudo adduser $Username sudo
 
+echo "done"
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "          interfaces"
@@ -62,6 +64,8 @@ sudo service networking restart
 echo "check ip address\n"
 ip addr
 
+echo "done"
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "          SSHD config..."
@@ -74,6 +78,8 @@ mkdir -pv /home/$Username/.ssh
 cat /root/roger-skyline/deploiement/files/id_rsa.pub >> /home/$Username/.ssh/authorized_keys     // PAS SUR ! ID_RSA PUB OU AUTHORIZED_KEYS//
 
 sudo service sshd restart
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -145,6 +151,8 @@ cp /root/roger-skyline/deploiement/files/portsentry.conf /etc/portsentry/
 
 sudo service portsentry restart
 
+echo "done"
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "          Mail server"
@@ -170,6 +178,8 @@ echo "@reboot	root    /root/script/update_script.sh\n" >> /etc/crontab
 echo "0  4  * * 1	root    /root/script/update_script.sh\n" >> /var/spool/cron/crontabs/root
 echo "@reboot	root    /root/script/update_script.sh\n" >> /var/spool/cron/crontabs/root
 
+echo "done"
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "			crontab script"
@@ -193,6 +203,8 @@ systemctl enable cron
 
 touch /root/script/tmp
 cat /etc/crontab > /root/script/tmp
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -233,6 +245,8 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=FR/ST=IDF/O=4
 sudo a2enmod SSL
 sudo service apache2 restart
 
+echo "done"
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "			cleaning..."
@@ -241,6 +255,7 @@ echo "\n"
 apt-get remove git -y
 apt-get purge git -y
 rm -rf /root/roger-skyline
+echo "done"
 
 echo "subject: Install done for $Username." | sudo sendmail -v ccarole@student.42.fr
 echo "\n"
