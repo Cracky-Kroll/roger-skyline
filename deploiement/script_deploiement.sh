@@ -160,7 +160,7 @@ echo "\n"
 #/var/log/update_script.log. A chaque reboot et 1 fois par semaine a 4h du mat.
 
 mkdir /root/script
-cp /root/roger-skyline/files/update_script.sh /root/script
+cp /root/roger-skyline/deploiement/files/update_script.sh /root/script
 chmod 755 /root/script/update_script.sh
 chown root /root/script/update_script.sh
 
@@ -213,22 +213,15 @@ chown -R $Username:$Username /var/www/login.fr/html
 chmod -R 755 /var/www/login.fr/html
 
 cp /root/roger-skyline/deploiement/files/index.html /var/www/login.fr/html
-cp /root/roger-skyline/deploiement/files/styles /var/www/login.fr/html
+cp /root/roger-skyline/deploiement/files/styles.css /var/www/login.fr/html
 
+cp /root/roger-skyline/deploiement/files/default-ssl.conf /etc/apache2/sites-available
 
+rm /etc/apache2/sites-available/000-default.conf
+cp /root/roger-skyline/deploiement/files/000-default.conf /etc/apache2/sites-available/
+ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled
 
-
-
-
-
-
-
-
-
-
-
-
-
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
