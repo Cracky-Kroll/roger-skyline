@@ -21,20 +21,26 @@ apt-get install fail2ban -y
 apt-get install ufw -y
 apt-get install vim -y
 
+sleep 5
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "          debian disk info :"
 echo "\n"
 
-sudo fdisk -l                                   ??? sudo ou pas ?
+sudo fdisk -l
+
+sleep 3
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "          installing folder..."
 echo "\n"
 
-sudo cd /root                                    ??? sudo ou pas ?
+sudo cd /root
 git clone https://github.com/Cracky-Kroll /roger-skyline/root/roger-skyline
+
+sleep 3
 
 echo "\n"
 echo "------------------------------------\n"
@@ -43,9 +49,13 @@ echo "\n"
 
 echo "adding sudo user... Username ? (default: 'roger')"
 read Username
-Username=${Username:-"roger"}                                 ?
+Username=${Username:-"roger"}
 sudo adduser $Username
 sudo adduser $Username sudo
+
+sleep 4
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -62,6 +72,10 @@ sudo service networking restart
 echo "check ip address\n"
 ip addr
 
+sleep 4
+
+echo "done"
+
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "          SSHD config..."
@@ -74,7 +88,11 @@ mkdir -pv /home/$Username/.ssh
 cat /root/roger-skyline/deploiement/files/id_rsa.pub >> /home/$Username/.ssh/authorized_keys
 #// PAS SUR ! ID_RSA PUB OU AUTHORIZED_KEYS//
 
+sleep 3
+
 sudo service sshd restart
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -93,6 +111,8 @@ sudo ufw enable
 sudo ufw reload
 sudo ufw status verbose
 
+sleep 3
+
 sudo systemctl start ufw
 sudo systemctl enable ufw
 
@@ -104,6 +124,8 @@ sudo systemctl enable ufw
 
 sudo apt-get install iptables-persistent
 sudo iptables-save > /etc/iptables/rules.v6
+
+sleep 3
 
 echo "done"
 
@@ -131,6 +153,8 @@ sudo fail2ban-client status sshd
 #bannir manuellement une IP sur une jail
 #fail2ban-client set [nom de jail] banip [IP a bannir]
 
+sleep 4
+
 echo "done"
 
 echo "\n"
@@ -144,7 +168,11 @@ cp /root/roger-skyline/deploiement/files/portsentry /etc/default/
 mv /etc/portsentry/portsentry.conf /etc/portsentry/portsentry.conf_save
 cp /root/roger-skyline/deploiement/files/portsentry.conf /etc/portsentry/
 
+sleep 3
+
 sudo service portsentry restart
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -152,6 +180,8 @@ echo "          Mail server"
 echo "\n"
 
 yes 'Y' | sudo sendmailconfig
+
+sleep 2
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -165,11 +195,17 @@ cp /root/roger-skyline/deploiement/files/update_script.sh /root/script
 chmod 755 /root/script/update_script.sh
 chown root /root/script/update_script.sh
 
+sleep 3
+
 echo "0  4  * * 1	root    /root/script/update_script.sh\n" >> /etc/crontab
 echo "@reboot	root    /root/script/update_script.sh\n" >> /etc/crontab
 
 echo "0  4  * * 1	root    /root/script/update_script.sh\n" >> /var/spool/cron/crontabs/root
 echo "@reboot	root    /root/script/update_script.sh\n" >> /var/spool/cron/crontabs/root
+
+sleep 2
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -194,6 +230,10 @@ systemctl enable cron
 
 touch /root/script/tmp
 cat /etc/crontab > /root/script/tmp
+
+sleep 3
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -222,6 +262,8 @@ rm /etc/apache2/sites-available/000-default.conf
 cp /root/roger-skyline/deploiement/files/000-default.conf /etc/apache2/sites-available/
 ln -s /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled
 
+sleep 3
+
 echo "done"
 
 echo "\n"
@@ -231,8 +273,14 @@ echo "\n"
 
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=FR/ST=IDF/O=42/OU=Project-roger/CN=10.11.200.247" -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
 
+sleep 2
+
 sudo a2enmod SSL
 sudo service apache2 restart
+
+sleep 2
+
+echo "done"
 
 echo "\n"
 echo "---------------------------------------------------------------\n"
@@ -242,6 +290,7 @@ echo "\n"
 apt-get remove git -y
 apt-get purge git -y
 rm -rf /root/roger-skyline
+echo "done"
 
 echo "subject: Install done for $Username." | sudo sendmail -v ccarole@student.42.fr
 echo "\n"
