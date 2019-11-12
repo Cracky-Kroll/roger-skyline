@@ -100,7 +100,6 @@ echo "          setup Firewall..."
 echo "\n"
 
 sudo ufw enable
-sudo ufw allow sshd
 #ssh
 sudo ufw allow 51001/tcp
 #http
