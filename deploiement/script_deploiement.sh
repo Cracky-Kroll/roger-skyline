@@ -34,7 +34,7 @@ echo "          installing folder..."
 echo "\n"
 
 sudo cd /root                                    ??? sudo ou pas ?
-git clone .............................. /root/roger-skyline          mettre lien du git
+git clone https://github.com/Cracky-Kroll /roger-skyline/root/roger-skyline
 
 echo "\n"
 echo "------------------------------------\n"
@@ -71,7 +71,8 @@ mv /etc/ssh/sshd_config /etc/ssh/sshd_config_save
 
 cp /root/roger-skyline/deploiement/files/sshd_config /etc/ssh/
 mkdir -pv /home/$Username/.ssh
-cat /root/roger-skyline/deploiement/files/id_rsa.pub >> /home/$Username/.ssh/authorized_keys     // PAS SUR ! ID_RSA PUB OU AUTHORIZED_KEYS//
+cat /root/roger-skyline/deploiement/files/id_rsa.pub >> /home/$Username/.ssh/authorized_keys
+#// PAS SUR ! ID_RSA PUB OU AUTHORIZED_KEYS//
 
 sudo service sshd restart
 
@@ -95,11 +96,11 @@ sudo ufw status verbose
 sudo systemctl start ufw
 sudo systemctl enable ufw
 
-/*///////////////////////////////////////////////////////////////////// sais plus !!!!!
-sudo apt-get iptables
-sudo iptables -t filter -A INPUT -p tcp --dport 51001 -j ACCEPT
-sudo iptables -t filter -A OUTPUT -p tcp --dport 51001 -j ACCEPT
-*///////////////////////////////////////////////////////////////////
+#/*///////////////////////////////////////////////////////////////////// sais plus !!!!!
+#sudo apt-get iptables
+#sudo iptables -t filter -A INPUT -p tcp --dport 51001 -j ACCEPT
+#sudo iptables -t filter -A OUTPUT -p tcp --dport 51001 -j ACCEPT
+#*///////////////////////////////////////////////////////////////////
 
 sudo apt-get install iptables-persistent
 sudo iptables-save > /etc/iptables/rules.v6
