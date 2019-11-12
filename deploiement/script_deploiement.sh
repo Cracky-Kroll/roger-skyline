@@ -38,7 +38,7 @@ echo "          installing folder..."
 echo "\n"
 
 cd /root
-git clone https://github.com/Cracky-Kroll /root/roger-skyline
+git clone https://github.com/Cracky-Kroll/roger-skyline /root/roger-skyline
 
 sleep 3
 
