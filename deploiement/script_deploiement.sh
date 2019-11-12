@@ -134,6 +134,8 @@ echo "---------------------------------------------------------------\n"
 echo "          DOS protection..."
 echo "\n"
 
+sleep 2
+
 #cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
 #rm /etc/fail2ban/fail2ban.conf
 mv /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
@@ -209,7 +211,7 @@ echo "done"
 echo "\n"
 echo "---------------------------------------------------------------\n"
 echo "			crontab script"
-echo"\n"
+echo "\n"
 
 #script qui permet de surveiller modifications du fichier /etc/crontab et 
 #envoie un mail a root si modifie. tache planifie tous les jour a minuit.
@@ -274,7 +276,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=FR/ST=IDF/O=4
 
 sleep 2
 
-sudo a2enmod SSL
+sudo a2enmod ssl
 sudo service apache2 restart
 
 sleep 2
