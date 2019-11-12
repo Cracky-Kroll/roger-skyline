@@ -122,8 +122,6 @@ sudo systemctl enable ufw
 #sudo iptables -t filter -A OUTPUT -p tcp --dport 51001 -j ACCEPT
 #*///////////////////////////////////////////////////////////////////
 
-sudo apt-get install iptables-persistent
-sudo iptables-save > /etc/iptables/rules.v6
 
 sleep 3
 
@@ -172,6 +170,8 @@ cp /root/roger-skyline/deploiement/files/portsentry.conf /etc/portsentry/
 sleep 3
 
 sudo service portsentry restart
+sudo apt-get install iptables-persistent
+sudo iptables-save > /etc/iptables/rules.v6
 
 echo "done"
 
