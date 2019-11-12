@@ -135,31 +135,12 @@ sleep 2
 
 #cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
 #rm /etc/fail2ban/fail2ban.conf
-echo "\n"
-echo "JE SUIS LA 1"
-echo "\n"
-
 mv /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-echo "\n"
-echo "JE SUIS LA 2"
-echo "\n"
 cp /root/roger-skyline/deploiement/files/jail.conf /etc/fail2ban/
-echo "\n"
-echo "JE SUIS LA 3"
-echo "\n"
 cp /root/roger-skyline/deploiement/files/apache-dos.conf /etc/fail2ban/filter.d/
-echo "\n"
-echo "JE SUIS LA 4"
-echo "\n"
 sudo systemctl restart fail2ban
-echo "\n"
-echo "JE SUIS LA 5"
-echo "\n"
 #start la jail
 sudo fail2ban-client start
-echo "\n"
-echo "JE SUIS LA 6"
-echo "\n"
 echo "check jail status\n"
 sudo fail2ban-client status
 #verif status prison sshd avec nombre de tentative echouees et liste ip bannies
