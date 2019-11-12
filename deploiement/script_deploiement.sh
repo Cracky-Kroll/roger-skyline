@@ -134,17 +134,16 @@ echo "---------------------------------------------------------------\n"
 echo "          DOS protection..."
 echo "\n"
 
-cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
+#cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
 #rm /etc/fail2ban/fail2ban.conf
-cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-rm /etc/fail2ban/jail.conf
+mv /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 cp /root/roger-skyline/deploiement/files/jail.conf /etc/fail2ban/
 cp /root/roger-skyline/deploiement/files/apache-dos.conf /etc/fail2ban/filter.d/
 sudo systemctl restart fail2ban
 #start la jail
 sudo fail2ban-client start
 echo "check jail status\n"
-sudo fail2banclient status
+sudo fail2ban-client status
 #verif status prison sshd avec nombre de tentative echouees et liste ip bannies
 echo "check sshd's jail\n"
 sudo fail2ban-client status sshd
@@ -215,8 +214,8 @@ echo"\n"
 #script qui permet de surveiller modifications du fichier /etc/crontab et 
 #envoie un mail a root si modifie. tache planifie tous les jour a minuit.
 
-cp /root/roger-skyline/files/script_modif_crontab.sh /root/script/
-cp /root/roger-skyline/files/mail_type.txt /root/script/
+cp /root/roger-skyline/deploiement/files/script_modif_crontab.sh /root/script/
+cp /root/roger-skyline/deploiement/files/mail_type.txt /root/script/
 chmod 755 /root/script/script_modif_crontab.sh
 chown root /root/script/script_modif_crontab.sh
 chown root /root/script/mail_type.txt
@@ -254,7 +253,7 @@ chown -R $Username:$Username /var/www/login.fr/html
 chmod -R 755 /var/www/login.fr/html
 
 cp /root/roger-skyline/deploiement/files/index.html /var/www/login.fr/html
-cp /root/roger-skyline/deploiement/files/styles.css /var/www/login.fr/html
+cp /root/roger-skyline/deploiement/files/style.css /var/www/login.fr/html
 
 cp /root/roger-skyline/deploiement/files/default-ssl.conf /etc/apache2/sites-available
 
