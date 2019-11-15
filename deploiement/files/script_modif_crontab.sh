@@ -1,12 +1,12 @@
 #!/bin/bash
 
 cat /etc/crontab > /root/script/new
-DIFF=$(diff new tmp)
+DIFF=$(diff /root/script/new /root/script/tmp)
 if [ "$DIFF" != "" ]; then
-	cp mail_type.txt mail.txt
-	diff new tmp >> mail.txt
-	sudo sendmail -vt < mail.txt
-	rm -f tmp
-	rm -f mail.txt
-	cp new tmp
+	cp /root/script/mail_type.txt /root/script/mail.txt
+	diff /root/script/new /root/script/tmp >> /root/script/mail.txt
+	sudo sendmail -vt < /root/script/mail.txt
+	rm -f /root/script/tmp
+	rm -f /root/scrip/mail.txt
+	cp /root/script/new /root/script/tmp
 fi
